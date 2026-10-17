@@ -152,12 +152,13 @@
                 <span class="input-helper">We send edit access links here. No passwords.</span>
             </div>
 
-            <div class="input-group">
+                       <div class="input-group">
                 <label>Profile Photo</label>
                 <input type="file" id="avatar-file" accept="image/*" style="display: none;">
-                <button type="button" class="input-field" id="avatar-trigger" style="text-align: left; cursor: pointer; color: var(--text-muted);">
+                <!-- Upgraded Clickable Label Wrapper -->
+                <label for="avatar-file" id="avatar-trigger" class="input-field" style="display: block; text-align: left; cursor: pointer; color: var(--text-muted); background-color: var(--surface-card); border: 1px solid var(--border-gold-low); padding: 14px 16px; border-radius: 12px;">
                     Select business logo or photo
-                </button>
+                </label>
             </div>
 
             <div class="input-group">
@@ -206,19 +207,17 @@
     <script>
         // Initialize Supabase Client Connection
         const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
-
         const avatarTrigger = document.getElementById('avatar-trigger');
         const avatarFile = document.getElementById('avatar-file');
         const createForm = document.getElementById('create-hub-form');
         const submitBtn = createForm.querySelector('.submit-btn');
         let selectedFile = null;
 
-        // System file picker click interactions
-        avatarTrigger.addEventListener('click', () => avatarFile.click());
+        // Handles displaying the selected filename to non-technical users
         avatarFile.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                selectedFile = e.target.files[0];
-                avatarTrigger.innerText = `Selected: ${selectedFile.name}`;
+                selectedFile = e.target.files[0]; // Grabs the single image file correctly
+                avatarTrigger.innerText = `📸 Selected: ${selectedFile.name}`;
                 avatarTrigger.style.borderColor = 'var(--gold-primary)';
                 avatarTrigger.style.color = 'var(--text-white)';
             }

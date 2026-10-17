@@ -207,10 +207,15 @@
             
             <h2 class="panel-section-title">Edit Identity Profile</h2>
             <div class="control-card-group">
+
                 <div class="form-control-item">
-                    <label>Profile Image URL / Token</label>
-                    <input type="text" id="dash-photo-url" class="panel-input-field">
+                    <label>Profile Photo</label>
+                    <input type="file" id="dash-avatar-file" accept="image/*" style="display: none;">
+                    <label for="dash-avatar-file" id="dash-avatar-trigger" class="panel-input-field" style="display: block; text-align: left; cursor: pointer; color: var(--text-muted);">
+                        Click to change business photo or logo
+                    </label>
                 </div>
+
                 <div class="form-control-item">
                     <label>Business Display Name</label>
                     <input type="text" id="dash-display-name" class="panel-input-field" required>
@@ -253,6 +258,21 @@
         // Initialize Supabase Platform Connection
         const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
         let activeProfileId = null;
+                const dashAvatarTrigger = document.getElementById('dash-avatar-trigger');
+        const dashAvatarFile = document.getElementById('dash-avatar-file');
+        let newSelectedFile = null;
+
+        // Visual tracker updates button display state for non-technical users
+        dashAvatarFile.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                newSelectedFile = e.target.files;
+                dashAvatarTrigger.innerText = `📸 Selected: ${newSelectedFile.name}`;
+                dashAvatarTrigger.style.borderColor = 'var(--gold-primary)';
+                dashAvatarTrigger.style.color = 'var(--text-white)';
+            }
+        });
+
+
 
         // Secure Shield Gate: Enforce runtime user authentication session checks
         window.addEventListener('DOMContentLoaded', async () => {
