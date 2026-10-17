@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access My Hub — c37Biolink</title>
+    <style>
+        /* Modern Luxury Matte-Black & Trusted Gold Theme */
+        :root {
+            --bg-matte-black: #0A0A0A;
+            --surface-card: #141414;
+            --gold-primary: #D4AF37;
+            --gold-hover: #F3CD57;
+            --text-white: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --border-gold-low: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-matte-black);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .access-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: auto auto;
+        }
+
+        /* Tightly Positioned Header Area */
+        .brand-header {
+            text-align: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-gold-low);
+            margin-bottom: 28px;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-white);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .brand-logo span {
+            color: var(--gold-primary);
+        }
+
+        .brand-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .input-field {
+            width: 100%;
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-gold-low);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: var(--text-white);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.1);
+        }
+
+        .input-helper {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #B8860B 100%);
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.95;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0 10px 0;
+            border-top: 1px solid var(--border-gold-low);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="access-wrapper">
+        <div class="brand-header">
+            <a href="/" class="brand-logo">c37<span>Biolink</span></a>
+            <p>Manage your live business fleet</p>
+        </div>
+
+        <form id="access-request-form" onsubmit="event.preventDefault();">
+            <div class="input-group">
+                <label for="owner-email">To edit your page, enter the email you used</label>
+                <input type="email" id="owner-email" class="input-field" placeholder="e.g., john@gmail.com" required>
+                <span class="input-helper">We will send a secure, passwordless authentication link straight to your inbox.</span>
+            </div>
+
+            <button type="submit" class="submit-btn">Send me edit link →</button>
+        </form>
+    </div>
+    <!-- Inline Self-Contained Professional Support Rail -->
+    <footer style="text-align: center; padding: 30px 16px 20px 16px; border-top: 1px solid var(--border-gold-low); margin-top: 60px; width: 100%;">
+        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 24px;">
+            <a href="legal.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy & Terms</a>
+            <a href="#" onclick="alert('c37Biolink Corporate Desk\n\nFor commercial inquiries, strategic partnerships, tech infrastructure collaborations, or global brand scaling requests, please contact our administration panel directly at:\n\n✉️ info@c37.bio / koechc318@gmail.com\n\nResponse turnaround window: 24-48 business hours.'); return false;" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Support Desk</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 c37Biolink Platform. Operating Globally.</p>
+    </footer>
+
+    <!-- 1. Load Supabase CDN Library Engine -->
+    <script src="https://jsdelivr.net"></script>
+    
+    <!-- 2. Load Your Platform Configurations -->
+    <script src="config.js"></script>
+
+    <!-- 3. Passwordless Magic Link Logic Engine -->
+    <script>
+        // Initialize Supabase client using credentials from config.js
+        const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+
+        const loginForm = document.getElementById('access-request-form');
+        const emailInput = document.getElementById('owner-email');
+        const submitBtn = loginForm.querySelector('.submit-btn');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            if (!email) return;
+
+            // Visual feedback for the hustler
+            submitBtn.innerText = "Sending secure link...";
+            submitBtn.style.opacity = "0.7";
+            submitBtn.disabled = true;
+
+            try {
+                // Request passwordless OTP login from Supabase auth rail
+                const { data, error } = await supabase.auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        // Redirect path back to your dashboard page after email verification click
+                        emailRedirectTo: `${window.location.origin}/dashboard`
+                    }
+                });
+
+                if (error) throw error;
+
+                // Success response formatting
+                alert(`Success! Check your email inbox. We sent a secure link to access c37Biolink.`);
+                emailInput.value = "";
+                
+            } catch (err) {
+                console.error("Authentication Error:", err.message);
+                alert(`System Alert: ${err.message}`);
+            } finally {
+                // Reset button state
+                submitBtn.innerText = "Send me edit link →";
+                submitBtn.style.opacity = "1";
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>

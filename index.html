@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c37Biolink — Connecting Global Hustlers</title>
+    <meta name="description" content="One premium link for all your business channels: WhatsApp, TikTok Shop, Instagram, and payment points.">
+    <meta name="robots" content="index, follow">
+    <style>
+        /* Modern Luxury Matte-Black & Trusted Gold Theme */
+        :root {
+            --bg-matte-black: #0A0A0A;
+            --surface-card: #141414;
+            --gold-primary: #D4AF37;
+            --gold-hover: #F3CD57;
+            --text-white: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --border-gold-low: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-matte-black);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 32px 16px 20px 16px;
+        }
+
+        .profile-wrapper {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .avatar-frame {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background-color: var(--surface-card);
+            border: 2px solid var(--gold-primary);
+            object-fit: cover;
+            margin: 0 auto 16px auto;
+            display: block;
+        }
+
+        .display-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--text-white);
+        }
+
+        .bio-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+
+        .hustle-link-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #B8860B 100%);
+            color: #000000;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: center;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .hustle-link-btn:hover {
+            opacity: 0.95;
+        }
+
+        .metrics-badge {
+            display: inline-block;
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-gold-low);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gold-primary);
+            margin-bottom: 24px;
+        }
+
+        .platform-tagline {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .platform-tagline span {
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        .manage-hub-floating {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--text-white);
+            color: #0A0A0A;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-wrapper">
+        <!-- Main Component Shell -->
+        <img id="view-avatar" class="avatar-frame" src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='96' height='96' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'></path><circle cx='12' cy='7' r='4'></circle></svg>" alt="Avatar">
+        <h1 id="view-name" class="display-name">c37Biolink</h1>
+        <p id="view-bio" class="bio-text">Empowering global hustlers and digital merchants with professional multi-channel profile links.</p>
+
+               <!-- Dynamic Destination Holder List -->
+        <div id="view-links-grid" class="links-grid">
+            <!-- Custom Homepage Call To Actions -->
+            <a href="create.html" class="hustle-link-btn" id="home-cta-btn">Claim Your Bio-Link address →</a>
+            <a href="edit-access.html" class="hustle-link-btn" style="background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);">Manage My Active Hub</a>
+        </div>
+
+        <div id="view-count-badge" class="metrics-badge" style="display: none;">0 visits</div>
+
+        <div>
+            <a href="/create" class="platform-tagline">c37<span>Biolink</span> — Operating Globally</a>
+        </div>
+    </div>
+
+    <a href="/dashboard" id="floating-manager" class="manage-hub-floating">Manage my hub →</a>
+
+        <!-- Inline Self-Contained Professional Support Rail -->
+    <footer style="text-align: center; padding: 30px 16px 20px 16px; border-top: 1px solid var(--border-gold-low); margin-top: 60px; width: 100%;">
+        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 24px;">
+            <a href="legal.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy & Terms</a>
+            <a href="#" onclick="alert('c37Biolink Corporate Desk\n\nFor commercial inquiries, strategic partnerships, tech infrastructure collaborations, or global brand scaling requests, please contact our administration panel directly at:\n\n✉️ info@c37.bio / koechc318@gmail.com\n\nResponse turnaround window: 24-48 business hours.'); return false;" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Support Desk</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 c37Biolink Platform. Operating Globally.</p>
+    </footer>
+
+
+    <!-- Load Live Routing Scripts Natively -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="config.js"></script>
+    <script>
+        const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const currentPath = window.location.pathname.replace(/^\/|\/\$/g, '').toLowerCase();
+            
+            // If viewing main home domain routes, preserve clean introduction layout parameters
+            if (currentPath === "" || currentPath === "index.html" || currentPath === "profile.html") {
+                return;
+            }
+
+            // Otherwise, trigger live multi-brand data extraction from Supabase
+            document.getElementById('view-name').innerText = "Loading Profile...";
+            document.getElementById('view-bio').innerText = "Fetching custom data rows...";
+            document.getElementById('home-cta-btn').style.display = 'none';
+
+            try {
+                const { data: profile, error } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('username', currentPath)
+                    .single();
+
+                if (error || !profile) {
+                    document.getElementById('view-name').innerText = "Hub Address Unclaimed";
+                    document.getElementById('view-bio').innerText = `The link identity string /${currentPath} is available. Claim it free right now!`;
+                    document.getElementById('view-links-grid').innerHTML = `<a href="/create" class="hustle-link-btn">Create /${currentPath} Now →</a>`;
+                    return;
+                }
+
+                // Inject target profile attributes onto active layout elements
+                document.getElementById('view-name').innerText = profile.display_name;
+                document.getElementById('view-bio').innerText = profile.bio || "";
+                document.getElementById('view-count-badge').innerText = `${profile.views || 0} visits`;
+                document.getElementById('view-count-badge').style.display = 'inline-block';
+
+                if (profile.photo_url) {
+                    document.getElementById('view-avatar').src = profile.photo_url;
+                }
+
+                const grid = document.getElementById('view-links-grid');
+                grid.innerHTML = "";
+                
+                if (profile.links && Array.isArray(profile.links)) {
+                    profile.links.forEach(link => {
+                        const btn = document.createElement('a');
+                        btn.className = 'hustle-link-btn';
+                        btn.innerText = link.title;
+                        btn.href = link.url.startsWith('http') ? link.url : `https://${link.url}`;
+                        btn.target = "_blank";
+                        grid.appendChild(btn);
+                    });
+                }
+
+                     // Intelligent Spam-Proof Background Counter
+                const sessionKey = `c37_viewed_${currentPath}`;
+                if (!sessionStorage.getItem(sessionKey)) {
+                    sessionStorage.setItem(sessionKey, 'true');
+                    
+                    await supabase.rpc('increment_views', { row_id: profile.id }).catch(() => {
+                        supabase.from('profiles').update({ views: (profile.views + 1) }).eq('id', profile.id);
+                    });
+                }
+
+                // Dynamic Session Check Visibility Hook for Hub Owners
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session && session.user.id === profile.user_id) {
+                    document.getElementById('floating-manager').style.display = 'block';
+                }
+
+            } catch (err) {
+                console.error("Platform Data Retrieval Failure:", err.message);
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard — c37Biolink</title>
+    <style>
+        /* Modern Luxury Matte-Black & Trusted Gold Theme */
+        :root {
+            --bg-matte-black: #0A0A0A;
+            --surface-card: #141414;
+            --gold-primary: #D4AF37;
+            --gold-hover: #F3CD57;
+            --text-white: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --border-gold-low: rgba(212, 175, 55, 0.15);
+            --border-gold-high: rgba(212, 175, 55, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-matte-black);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+            flex-grow: 1;
+        }
+
+        /* Compact Header Area With Zero Unnecessary Space */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-gold-low);
+            margin-bottom: 20px;
+        }
+
+        .brand-logo-panel {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-white);
+            text-decoration: none;
+        }
+
+        .brand-logo-panel span {
+            color: var(--gold-primary);
+        }
+
+        .logout-action-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-gold-low);
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .logout-action-btn:hover {
+            color: var(--gold-primary);
+            border-color: var(--gold-primary);
+        }
+        /* End of Style Part 1 */
+        /* Live Status Alert Banner Layout */
+        .live-status-banner {
+            background: linear-gradient(135deg, #141414 0%, #1A1710 100%);
+            border: 1px solid var(--border-gold-high);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-status-banner p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .live-status-banner a {
+            color: var(--gold-primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .panel-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-primary);
+            margin-bottom: 12px;
+        }
+
+        .control-card-group {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-gold-low);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-control-item {
+            margin-bottom: 16px;
+        }
+
+        .form-control-item label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .panel-input-field {
+            width: 100%;
+            background-color: #1C1C1C;
+            border: 1px solid var(--border-gold-low);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text-white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .panel-input-field:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.1);
+        }
+
+        .save-hub-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #B8860B 100%);
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .panel-link-row {
+            background: #1A1A1A;
+            border: 1px solid var(--border-gold-low);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .delete-row-trigger {
+            color: #FF3B30;
+            font-size: 0.8rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- End of Style Part 2 -->
+    <div class="dashboard-container">
+        <!-- Tightly Packaged Header Area -->
+        <header class="dashboard-header">
+            <a href="/" class="brand-logo-panel">c37<span>Biolink</span></a>
+            <button id="logout-trigger" class="logout-action-btn">Logout</button>
+        </header>
+
+                <!-- Dynamic Live Destination Track Row with Explicit Copy Rails -->
+        <div class="live-status-banner">
+            <div>
+                <p>Your platform link is active:</p>
+                <strong id="live-url-display" style="font-size: 0.95rem; color: var(--text-white);">c37Biolink/loading</strong>
+                <button type="button" id="dash-copy-link-btn" style="display:block; background: transparent; color: var(--gold-primary); border: 1px solid var(--gold-primary); padding: 4px 8px; font-size: 0.75rem; font-weight: 700; border-radius: 6px; margin-top: 8px; cursor: pointer;">📋 Copy Link To Clipboard</button>
+            </div>
+            <a href="#" id="view-live-trigger" target="_blank">View Live →</a>
+        </div>
+
+        <form id="dashboard-management-form" onsubmit="event.preventDefault();">
+            
+            <h2 class="panel-section-title">Edit Identity Profile</h2>
+            <div class="control-card-group">
+                <div class="form-control-item">
+                    <label>Profile Image URL / Token</label>
+                    <input type="text" id="dash-photo-url" class="panel-input-field">
+                </div>
+                <div class="form-control-item">
+                    <label>Business Display Name</label>
+                    <input type="text" id="dash-display-name" class="panel-input-field" required>
+                </div>
+                <div class="form-control-item">
+                    <label>Hustle Bio / Summary Description</label>
+                    <input type="text" id="dash-bio" class="panel-input-field">
+                </div>
+            </div>
+
+            <h2 class="panel-section-title">Manage Content Links</h2>
+            <div class="control-card-group">
+                <div id="dashboard-links-list">
+                    <!-- JavaScript populates current list entries cleanly here -->
+                </div>
+                
+                <button type="button" id="dash-add-link-btn" class="panel-input-field" style="background: transparent; border-style: dashed; border-color: var(--gold-primary); color: var(--gold-primary); font-weight: 600; cursor: pointer; margin-top: 8px;">
+                    + Add New Destination Link
+                </button>
+            </div>
+
+            <button type="submit" class="save-hub-btn">Save Content Changes</button>
+        </form>
+    </div>
+
+        <!-- Inline Self-Contained Professional Support Rail -->
+    <footer style="text-align: center; padding: 30px 16px 20px 16px; border-top: 1px solid var(--border-gold-low); margin-top: 60px; width: 100%;">
+        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 24px;">
+            <a href="legal.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy & Terms</a>
+            <a href="#" onclick="alert('c37Biolink Corporate Desk\n\nFor commercial inquiries, strategic partnerships, tech infrastructure collaborations, or global brand scaling requests, please contact our administration panel directly at:\n\n✉️ info@c37.bio / koechc318@gmail.com\n\nResponse turnaround window: 24-48 business hours.'); return false;" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Support Desk</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 c37Biolink Platform. Operating Globally.</p>
+    </footer>
+
+    <!-- End of HTML Structure Part 3 -->
+    <!-- Load Core External Service Packages Natively -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="config.js"></script>
+    <script>
+        // Initialize Supabase Platform Connection
+        const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+        let activeProfileId = null;
+
+        // Secure Shield Gate: Enforce runtime user authentication session checks
+        window.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session }, error } = await supabase.auth.getSession();
+            
+            // Redirect immediately to access portal if token session verification fails
+            if (error || !session) {
+                window.location.href = '/edit-access';
+                return;
+            }
+
+            try {
+                // Fetch authenticated account profile data mapping records from Supabase
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('user_id', session.user.id)
+                    .single();
+
+                if (!profile) {
+                    alert("Account profile mapping record missing. Redirecting to create platform.");
+                    window.location.href = '/create';
+                    return;
+                }
+
+                activeProfileId = profile.id;
+
+                // Sync current database record text state into form fields
+                document.getElementById('live-url-display').innerText = `${window.location.host}/${profile.username}`;
+                document.getElementById('view-live-trigger').href = `/${profile.username}`;
+                document.getElementById('dash-photo-url').value = profile.photo_url || "";
+                document.getElementById('dash-display-name').value = profile.display_name;
+                document.getElementById('dash-bio').value = profile.bio || "";
+
+                // Hydrate existing interactive content link buttons safely
+                const list = document.getElementById('dashboard-links-list');
+                list.innerHTML = ""; // Clear loader states
+                
+                if (profile.links && Array.isArray(profile.links)) {
+                    profile.links.forEach(link => {
+                        injectLinkRow(link.title, link.url);
+                    });
+                }
+
+            } catch (err) {
+                console.error("Dashboard Session Loading Error:", err.message);
+            }
+        });
+        /* End of Logic Part 4 */
+        // Interface Helper Function: Generate modular, cleanly editable content link nodes
+        function injectLinkRow(title = "", url = "") {
+            const list = document.getElementById('dashboard-links-list');
+            const row = document.createElement('div');
+            row.className = 'panel-link-row';
+            row.innerHTML = `
+                <button type="button" class="delete-row-trigger" onclick="this.parentElement.remove();">Remove</button>
+                <input type="text" class="panel-input-field link-title" placeholder="Link Label" value="${title}" style="margin-bottom:6px;" required>
+                <input type="text" class="panel-input-field link-url" placeholder="Target Link Path" value="${url}" required>
+            `;
+            list.appendChild(row);
+        }
+
+        // Hook up interactive add button trigger
+        document.getElementById('dash-add-link-btn').addEventListener('click', () => injectLinkRow());
+
+        // Process Form Data Submissions: Execute database state synchronization changes via updates
+        document.getElementById('dashboard-management-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('.save-hub-btn');
+
+            submitBtn.innerText = "Synchronizing live content database changes...";
+            submitBtn.disabled = true;
+
+            const linkRows = document.getElementsByClassName('panel-link-row');
+            const updatedLinks = [];
+            for (let row of linkRows) {
+                const t = row.querySelector('.link-title').value.trim();
+                const u = row.querySelector('.link-url').value.trim();
+                if (t && u) updatedLinks.push({ title: t, url: u });
+            }
+
+            try {
+                const { error } = await supabase
+                    .from('profiles')
+                    .update({
+                        display_name: document.getElementById('dash-display-name').value.trim(),
+                        bio: document.getElementById('dash-bio').value.trim(),
+                        photo_url: document.getElementById('dash-photo-url').value.trim(),
+                        links: updatedLinks
+                    })
+                    .eq('id', activeProfileId);
+
+                if (error) throw error;
+                alert("Success! Your live c37Biolink changes are synchronized globally across networks.");
+
+            } catch (err) {
+                alert(`Update Failure Context: ${err.message}`);
+            } finally {
+                submitBtn.innerText = "Save Content Changes";
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Trigger safe administrative termination tracking states
+        document.getElementById('logout-trigger').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = '/edit-access';
+        });
+                // Clipboard action script controller for the owner dashboard banner
+        document.getElementById('dash-copy-link-btn').addEventListener('click', () => {
+            const urlText = document.getElementById('live-url-display').innerText;
+            // Generate clean protocol string prefix for external platforms
+            const absoluteLink = window.location.protocol + "//" + urlText;
+            navigator.clipboard.writeText(absoluteLink).then(() => {
+                alert("Your c37Biolink address has been copied to your clipboard successfully!");
+            }).catch(() => {
+                alert("Copy failed. Please manually select and copy the text link address.");
+            });
+        });
+
+    </script>
+    
+</body>
+</html>

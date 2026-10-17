@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Hub — c37Biolink</title>
+    <style>
+        /* Modern Luxury Matte-Black & Trusted Gold Theme */
+        :root {
+            --bg-matte-black: #0A0A0A;
+            --surface-card: #141414;
+            --gold-primary: #D4AF37;
+            --gold-hover: #F3CD57;
+            --text-white: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --border-gold-low: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-matte-black);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            flex-grow: 1;
+        }
+
+        .brand-header {
+            text-align: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-gold-low);
+            margin-bottom: 24px;
+        }
+
+        .brand-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-white);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .brand-logo span {
+            color: var(--gold-primary);
+        }
+
+        .brand-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+        }
+
+        .input-field {
+            width: 100%;
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-gold-low);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: var(--text-white);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.1);
+        }
+
+        .input-helper {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            display: block;
+        }
+
+        .dynamic-link-row {
+            background-color: #1A1A1A;
+            border: 1px solid var(--border-gold-low);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #B8860B 100%);
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-top: 12px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-wrapper">
+        <div class="brand-header">
+            <a href="/" class="brand-logo">c37<span>Biolink</span></a>
+            <p>One link for all your business channels</p>
+        </div>
+
+        <form id="create-hub-form" onsubmit="event.preventDefault();">
+            <div class="input-group">
+                <label for="username">Link Name</label>
+                <input type="text" id="username" class="input-field" placeholder="e.g., john" required>
+                <span class="input-helper">Your address will be ://onrender.com</span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email for Editing</label>
+                <input type="email" id="email" class="input-field" placeholder="e.g., john@gmail.com" required>
+                <span class="input-helper">We send edit access links here. No passwords.</span>
+            </div>
+
+            <div class="input-group">
+                <label>Profile Photo</label>
+                <input type="file" id="avatar-file" accept="image/*" style="display: none;">
+                <button type="button" class="input-field" id="avatar-trigger" style="text-align: left; cursor: pointer; color: var(--text-muted);">
+                    Select business logo or photo
+                </button>
+            </div>
+
+            <div class="input-group">
+                <label for="display-name">Display Name</label>
+                <input type="text" id="display-name" class="input-field" placeholder="e.g., John Gloves Seller" required>
+            </div>
+
+            <div class="input-group">
+                <label for="bio">Bio / Hustle Summary</label>
+                <input type="text" id="bio" class="input-field" placeholder="e.g., Nairobi hustler, DM for orders">
+            </div>
+
+            <div class="input-group">
+                <label>Your Links</label>
+                <div id="links-container">
+                    <div class="dynamic-link-row">
+                        <input type="text" class="input-field link-title" placeholder="Link Title (e.g., WhatsApp)" style="margin-bottom: 8px;" required>
+                        <input type="text" class="input-field link-url" placeholder="URL Link (e.g., wa.me/xxx)" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" id="add-link-btn" class="input-field" style="background-color: transparent; border-style: dashed; border-color: var(--gold-primary); color: var(--gold-primary); font-weight: 600; cursor: pointer; margin-bottom: 24px;">
+                + Add Another Link
+            </button>
+
+            <button type="submit" class="submit-btn">Create My Link →</button>
+        </form>
+    </div>
+       <!-- Inline Self-Contained Professional Support Rail -->
+    <footer style="text-align: center; padding: 30px 16px 20px 16px; border-top: 1px solid var(--border-gold-low); margin-top: 60px; width: 100%;">
+        <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 24px;">
+            <a href="legal.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy & Terms</a>
+            <a href="#" onclick="alert('c37Biolink Corporate Desk\n\nFor commercial inquiries, strategic partnerships, tech infrastructure collaborations, or global brand scaling requests, please contact our administration panel directly at:\n\n✉️ info@c37.bio / koechc318@gmail.com\n\nResponse turnaround window: 24-48 business hours.'); return false;" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Support Desk</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 c37Biolink Platform. Operating Globally.</p>
+    </footer>
+
+        <!-- 1. Load Supabase Client SDK Engine -->
+    <script src="https://jsdelivr.net"></script>
+    
+    <!-- 2. Load Central Configuration Parameters -->
+    <script src="config.js"></script>
+
+    <!-- 3. Form Processing Logic Engine -->
+    <script>
+        // Initialize Supabase Client Connection
+        const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+
+        const avatarTrigger = document.getElementById('avatar-trigger');
+        const avatarFile = document.getElementById('avatar-file');
+        const createForm = document.getElementById('create-hub-form');
+        const submitBtn = createForm.querySelector('.submit-btn');
+        let selectedFile = null;
+
+        // System file picker click interactions
+        avatarTrigger.addEventListener('click', () => avatarFile.click());
+        avatarFile.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                avatarTrigger.innerText = `Selected: ${selectedFile.name}`;
+                avatarTrigger.style.borderColor = 'var(--gold-primary)';
+                avatarTrigger.style.color = 'var(--text-white)';
+            }
+        });
+
+        // Dynamic element stacking functionality for adding rows
+        document.getElementById('add-link-btn').addEventListener('click', () => {
+            const container = document.getElementById('links-container');
+            const linkRow = document.createElement('div');
+            linkRow.className = 'dynamic-link-row';
+            linkRow.style.marginTop = '12px';
+            linkRow.innerHTML = `
+                <input type="text" class="input-field link-title" placeholder="Link Title" style="margin-bottom: 8px;" required>
+                <input type="text" class="input-field link-url" placeholder="URL link path" required>
+            `;
+            container.appendChild(linkRow);
+        });
+
+        // Master platform profile submission processor
+        createForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim().toLowerCase().replace(/\s+/g, '');
+            const email = document.getElementById('email').value.trim();
+            const displayName = document.getElementById('display-name').value.trim();
+            const bio = document.getElementById('bio').value.trim();
+
+            // Form structural verification validation rules
+            if (!/^[a-z0-9_]{2,20}\$/.test(username)) {
+                alert("Username must be between 2-20 characters, lowercase letters, numbers, or underscores only.");
+                return;
+            }
+
+            // Lock interface execution elements to protect input pipeline state
+            submitBtn.innerText = "Processing configuration setup...";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+
+            let finalPhotoUrl = "";
+
+            try {
+                // Action 1: Upload business avatar to Cloudinary if selected
+                if (selectedFile) {
+                    submitBtn.innerText = "Optimizing media profile asset...";
+                    const formData = new FormData();
+                    formData.append('file', selectedFile);
+                    formData.append('upload_preset', CONFIG.CLOUDINARY_UPLOAD_PRESET);
+
+                    const uploadResponse = await fetch(`https://cloudinary.com{CONFIG.CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!uploadResponse.ok) throw new Error("Cloudinary file upload failed.");
+                    const uploadResult = await uploadResponse.json();
+                    finalPhotoUrl = uploadResult.secure_url;
+                }
+
+                // Action 2: Package multi-destination payload rows into JSON format
+                const linkRows = document.getElementsByClassName('dynamic-link-row');
+                const linksArray = [];
+                for (let row of linkRows) {
+                    const title = row.querySelector('.link-title').value.trim();
+                    const url = row.querySelector('.link-url').value.trim();
+                    if (title && url) {
+                        linksArray.push({ title, url });
+                    }
+                }
+
+                // Action 3: Trigger Supabase Auth pipeline to claim ownership layer
+                submitBtn.innerText = "Securing administrative keys...";
+                const { data: authData, error: authError } = await supabase.auth.signInWithOtp({
+                    email: email,
+                    options: { emailRedirectTo: `${window.location.origin}/dashboard` }
+                });
+
+                if (authError) throw authError;
+
+                // Action 4: Save verified content mapping profile inside profiles table
+                submitBtn.innerText = "Publishing business platform cards...";
+                const { error: dbError } = await supabase
+                    .from('profiles')
+                    .insert([{
+                        user_id: supabase.auth.user()?.id || '00000000-0000-0000-0000-000000000000', // Managed natively via trigger or updated upon callback
+                        username: username,
+                        display_name: displayName,
+                        bio: bio,
+                        photo_url: finalPhotoUrl,
+                        links: linksArray
+                    }]);
+
+                alert(`Perfect! c37Biolink setup initialized. Check your email (${email}) to confirm your account and activate your live link dashboard!`);
+                createForm.reset();
+                avatarTrigger.innerText = "Select business logo or photo";
+
+            } catch (err) {
+                console.error("Platform Creation Failure Context:", err.message);
+                alert(`Platform Alert: ${err.message}`);
+            } finally {
+                // Restore interactive elements to user control
+                submitBtn.innerText = "Create My Link →";
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+            }
+        });
+    </script>
+</body>
+</html>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+/create          /create.html        200
+/dashboard       /dashboard.html     200
+/edit-access     /edit-access.html   200
+/*               /index.html         200
