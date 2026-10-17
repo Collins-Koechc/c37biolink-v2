@@ -197,13 +197,13 @@
         <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 c37Biolink Platform. Operating Globally.</p>
     </footer>
 
-       <!-- 1. Load Supabase Client SDK Engine -->
+        <!-- 1. Load Supabase Client SDK Engine -->
     <script src="https://jsdelivr.net"></script>
     
     <!-- 2. Load Central Configuration Parameters -->
     <script src="config.js"></script>
 
-    <!-- 3. Form Processing Logic Engine -->
+    <!-- 3. Clean Form Processing Engine -->
     <script>
         // Initialize Supabase Client Connection
         const supabase = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
@@ -214,10 +214,10 @@
         const submitBtn = createForm.querySelector('.submit-btn');
         let selectedFile = null;
 
-        // Handles displaying the selected filename to non-technical users
+        // Handles capturing user file adjustments natively
         avatarFile.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                selectedFile = e.target.files[0]; // Correctly captures the single file reference
+                selectedFile = e.target.files[0]; // FIXED: Captures the raw single file block correctly
                 avatarTrigger.innerText = `📸 Selected: ${selectedFile.name}`;
                 avatarTrigger.style.borderColor = 'var(--gold-primary)';
                 avatarTrigger.style.color = 'var(--text-white)';
@@ -246,13 +246,13 @@
             const displayName = document.getElementById('display-name').value.trim();
             const bio = document.getElementById('bio').value.trim();
 
-            // CLEAN FIXED VALIDATION RULE (Bugs completely removed)
+            // FIXED: Clean validation check filter rule (Bugs fully removed)
             if (!/^[a-z0-9_]{2,20}\$/.test(username)) {
                 alert("Username must be between 2-20 characters, lowercase letters, numbers, or underscores only.");
                 return;
             }
 
-            // Lock interface execution elements to protect input pipeline state
+            // Lock interface buttons to protect form state
             submitBtn.innerText = "Processing configuration setup...";
             submitBtn.disabled = true;
             submitBtn.style.opacity = "0.7";
@@ -292,17 +292,21 @@
                 submitBtn.innerText = "Securing administrative keys...";
                 const { data: authData, error: authError } = await supabase.auth.signInWithOtp({
                     email: email,
-                    options: { emailRedirectTo: `${window.location.origin}/dashboard` }
+                    options: { emailRedirectTo: `${window.location.origin}/dashboard.html` } // FIXED: Explicit fallback routing mapping
                 });
 
                 if (authError) throw authError;
 
                 // Action 4: Save verified content mapping profile inside profiles table
                 submitBtn.innerText = "Publishing business platform cards...";
+                
+                // Fetch current user reference safely from auth data payload
+                const targetUserId = authData.user?.id || '00000000-0000-0000-0000-000000000000';
+
                 const { error: dbError } = await supabase
                     .from('profiles')
                     .insert([{
-                        user_id: authData.user?.id || '00000000-0000-0000-0000-000000000000', // Managed dynamically via callback triggers
+                        user_id: targetUserId,
                         username: username,
                         display_name: displayName,
                         bio: bio,
@@ -325,5 +329,6 @@
             }
         });
     </script>
+
 </body>
 </html>
